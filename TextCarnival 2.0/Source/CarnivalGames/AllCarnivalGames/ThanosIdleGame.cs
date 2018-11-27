@@ -37,8 +37,10 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
             writeLine("So basically... im monky");
             wait(1);
             clear();
-            writeLine("You are the Mad Titan Thanos so click spacebar to raid a world and collect some(or one for now) thanos coins");
+            writeLine("You are the Mad Titan Thanos so click spacebar at any time\neven in other menus to raid a world and collect some thanos coins");
             writeLine("When you are ready my lord access the shop via the X key on your magic keyboard thingy to buy better minions or even \nsome magic stones O-O");
+            writeLine("Click Q at any time to exit the game");
+            
             int x = 0;
             if (x == 0)
             {
@@ -52,9 +54,9 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
             }
             for (x = 0; x < time; x = x + 1)
             {
-                ConsoleKeyInfo input = Console.ReadKey();
+                ConsoleKey inputmain = getKey();
                 
-                if (input.KeyChar == ' ')
+                if (inputmain == ConsoleKey.Spacebar)
                 {
                     clear();
                     earned = (thanoscoins * -1);
@@ -69,10 +71,20 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
                     else
                     writeLine("Stats:\nMinion Bonus: " + minions + "\nFleet Ships: " + fleet + "\nInfinity Stone Multiplier: " + infinitystonemult);
                 }
-                if (input.KeyChar == 'x')
+                if (inputmain == ConsoleKey.X)
                 {
                     clear();
                     Shop();
+                }
+                if(inputmain == ConsoleKey.Q)
+                {
+                    clear();
+                    writeLine("Do you wish to exit the game? Y/N");
+                    bool exit = getYesNo();
+                    if(exit)
+                    {
+                        break;
+                    } 
                 }
 
                 time = time + 1;
@@ -153,7 +165,7 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
                 {
                     if (!upgrade[3])
                     {
-                        if (thanoscoins >= 150000)
+                        if (thanoscoins >= 0)
                         {
                             clear();
                             writeLine("You actually cannot buy this one my lord...");
@@ -164,8 +176,10 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
                             bool answer = getYesNo();
                             if (answer)
                             {
+                                thots = thots - 1;
                                 writeLine("The number of thots on this planet: " + thots);
                                 wait(3);
+                                infinitystonemult = infinitystonemult + 1;
                                 writeLine("Soul Stone obtained");
                                 upgrade[3] = true;
                             }
@@ -326,6 +340,7 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
                         if (thanoscoins >= 3000)
                         {
                             clear();
+                            thanoscoins = thanoscoins - 3000;
                             fleet = fleet + 1;
                             writeLine("Thanos Car Wins Piston Cup\nThanos Car Wins Piston Cup");
                             upgrade[10] = true;
@@ -345,6 +360,7 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
                         if (thanoscoins >= 6000)
                         {
                             clear();
+                            thanoscoins = thanoscoins - 6000;
                             fleet = fleet + 2;
                             writeLine("\"We are now in a flying donut, billions of miles from Earth.\"");
                             upgrade[11] = true;
@@ -364,6 +380,7 @@ namespace TextCarnivalV2.Source.CarnivalGames.AllCarnivalGames
                         if (thanoscoins >= 10000)
                         {
                             clear();
+                            thanoscoins = thanoscoins - 10000;
                             fleet = fleet + 3;
                             writeLine("Thanos really travelling in a big old H");
                             upgrade[12] = true;
